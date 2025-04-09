@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Container, Card, CardBody, CardTitle } from 'reactstrap';
 
 function App() {
   const [image, setImage] = useState(null);
@@ -12,41 +13,32 @@ function App() {
   };
 
   const handleAnalyze = () => {
-    // Burada backend'e çağrı yapıp sonucu alacağız
     setResult("Çizim başarılı bir şekilde analiz edildi! (Sonuçlar gelecek)");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
-    <div className="bg-white p-8 rounded-xl shadow-lg max-w-lg w-full">
-    <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Çizim Duygusal Durum Analizi</h1>
-    <div className="text-4xl text-red-500">Tailwind Test</div>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Card className="p-4 shadow-lg hover:shadow-2xl transition duration-300 ease-in-out" style={{ maxWidth: '500px', width: '100%' }}>
 
-    {/* Resim Yükleme */}
-    <div className="mb-4">
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className="file-input file-input-bordered file-input-primary w-full text-gray-700 py-2 px-4 border-2 rounded-md"
-      />
-    </div>
-    
-    {/* Yüklenen Resmi Göster */}
-    {image && <img src={image} alt="Uploaded" className="max-w-xs mb-4 mx-auto border-2 border-gray-200 rounded-lg shadow-md" />}
-    
-    {/* Analiz Butonu */}
-    <button
-      onClick={handleAnalyze}
-      className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Analiz Et
-    </button>
+        <CardBody>
+        <CardTitle tag="h1" className="text-center animate__animated animate__fadeIn animate__delay-1s">
+          Drawings of Emotions
+        </CardTitle>
 
-    {/* Sonuç */}
-    {result && <p className="mt-6 text-xl text-gray-800 text-center">{result}</p>}
-  </div>
-</div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="form-control mb-4"
+          />
+          {image && <img src={image} alt="Uploaded" className="img-fluid mb-4 mx-auto" />}
+          <Button onClick={handleAnalyze} color="primary" block className="transition duration-300 transform hover:scale-105">
+            <i className="fa fa-magic"></i> Analiz Et
+          </Button>
+          {result && <p className="mt-4 text-center">{result}</p>}
+        </CardBody>
+      </Card>
+    </Container>
   );
 }
 
